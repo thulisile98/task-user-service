@@ -24,7 +24,7 @@ public class ApplicationConfiguration {
                         management.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 ).authorizeHttpRequests(
                         Authorize -> Authorize.requestMatchers("/api/**").authenticated().anyRequest()
-                                .permitAll()).addFilterBefore(null, BasicAuthenticationFilter.class)
+                                .permitAll()).addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)
                 .csrf(csrf -> csrf.disable()).cors(cors -> cors.configurationSource(corsConfigurationSource())).httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults());
         return  http.build();
